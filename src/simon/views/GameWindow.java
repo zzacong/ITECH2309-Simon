@@ -58,10 +58,10 @@ public class GameWindow {
         frmGameWindow.setResizable(false);
         frmGameWindow.setBounds(100, 100, 450, 300);
         frmGameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         GridBagLayout gbl_mainPanel = new GridBagLayout();
-        gbl_mainPanel.rowWeights = new double[]{0.0, 0.0, 0.0};
-        gbl_mainPanel.columnWeights = new double[]{1.0};
+        gbl_mainPanel.rowWeights = new double[] { 0.0, 0.0, 0.0 };
+        gbl_mainPanel.columnWeights = new double[] { 1.0 };
         JPanel mainPanel = new JPanel(gbl_mainPanel);
         frmGameWindow.getContentPane().add(mainPanel, BorderLayout.CENTER);
 
@@ -72,21 +72,21 @@ public class GameWindow {
         gbc_titlePanel.gridy = 0;
         gbc_titlePanel.insets = new Insets(10, 0, 20, 0);
         mainPanel.add(titlePanel, gbc_titlePanel);
-        
+
         JLabel lblTitle = new JLabel("Simon Game");
         lblTitle.setFont(new Font("Lucida Grande", Font.BOLD, 20));
         GridBagConstraints gbc_lblTitle = new GridBagConstraints();
         gbc_lblTitle.gridx = 0;
         gbc_lblTitle.gridy = 0;
         titlePanel.add(BorderLayout.CENTER, lblTitle);
-        
+
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc_buttonPanel = new GridBagConstraints();
         gbc_buttonPanel.fill = GridBagConstraints.BOTH;
         gbc_buttonPanel.gridx = 0;
         gbc_buttonPanel.gridy = 1;
         mainPanel.add(buttonPanel, gbc_buttonPanel);
-        
+
         JButton btnGreen = new JButton("GREEN");
         btnGreen.setOpaque(true);
         btnGreen.setBackground(Color.GREEN);
@@ -97,7 +97,7 @@ public class GameWindow {
         gbc_btnGreen.gridx = 0;
         gbc_btnGreen.gridy = 0;
         buttonPanel.add(btnGreen, gbc_btnGreen);
-        
+
         JButton btnRed = new JButton("RED");
         btnRed.setOpaque(true);
         btnRed.setBackground(Color.RED);
@@ -108,7 +108,7 @@ public class GameWindow {
         gbc_btnRed.gridx = 1;
         gbc_btnRed.gridy = 0;
         buttonPanel.add(btnRed, gbc_btnRed);
-        
+
         JButton btnYellow = new JButton("YELLOW");
         btnYellow.setOpaque(true);
         btnYellow.setBackground(Color.YELLOW);
@@ -119,7 +119,7 @@ public class GameWindow {
         gbc_btnYellow.gridx = 0;
         gbc_btnYellow.gridy = 1;
         buttonPanel.add(btnYellow, gbc_btnYellow);
-        
+
         JButton btnBlue = new JButton("BLUE");
         btnBlue.setOpaque(true);
         btnBlue.setBackground(Color.BLUE);
@@ -131,7 +131,7 @@ public class GameWindow {
         gbc_btnBlue.gridx = 1;
         gbc_btnBlue.gridy = 1;
         buttonPanel.add(btnBlue, gbc_btnBlue);
-        
+
         JPanel scorePanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc_scorePanel = new GridBagConstraints();
         gbc_scorePanel.insets = new Insets(0, 0, 20, 0);
@@ -140,7 +140,7 @@ public class GameWindow {
         gbc_scorePanel.gridx = 0;
         gbc_scorePanel.gridy = 2;
         mainPanel.add(scorePanel, gbc_scorePanel);
-        
+
         JLabel lblCurrentScore = new JLabel("Score: ");
         lblCurrentScore.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
         GridBagConstraints gbc_lblCurrentScore = new GridBagConstraints();
@@ -149,7 +149,7 @@ public class GameWindow {
         gbc_lblCurrentScore.gridx = 0;
         gbc_lblCurrentScore.gridy = 0;
         scorePanel.add(lblCurrentScore, gbc_lblCurrentScore);
-        
+
         JLabel lblHighScore = new JLabel("High Score: ");
         lblHighScore.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
         GridBagConstraints gbc_lblHighScore = new GridBagConstraints();
@@ -158,7 +158,7 @@ public class GameWindow {
         gbc_lblHighScore.gridx = 0;
         gbc_lblHighScore.gridy = 1;
         scorePanel.add(lblHighScore, gbc_lblHighScore);
-        
+
         txtCurrentScore = new JTextField();
         txtCurrentScore.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
         txtCurrentScore.setEditable(false);
@@ -168,7 +168,7 @@ public class GameWindow {
         gbc_txtCurrentScore.gridy = 0;
         scorePanel.add(txtCurrentScore, gbc_txtCurrentScore);
         txtCurrentScore.setColumns(10);
-        
+
         txtHighScore = new JTextField();
         txtHighScore.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
         txtHighScore.setEditable(false);
@@ -177,7 +177,7 @@ public class GameWindow {
         gbc_txtHighScore.gridy = 1;
         scorePanel.add(txtHighScore, gbc_txtHighScore);
         txtHighScore.setColumns(10);
-        
+
         frmGameWindow.setVisible(true);
     }
 
