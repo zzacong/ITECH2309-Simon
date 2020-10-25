@@ -3,7 +3,10 @@
  */
 package simon.views;
 
+import java.awt.Color;
+
 import javax.swing.ButtonModel;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.event.ChangeEvent;
@@ -21,8 +24,6 @@ public abstract class Button extends JButton {
 
     public Button(COLOUR colour) {
         this.setColour(colour);
-        setIcon(getDefaultIcon());
-        controlAppearance();
     }
 
     public COLOUR getColour() {
@@ -33,27 +34,12 @@ public abstract class Button extends JButton {
         this.colour = colour;
     }
 
-    public void controlAppearance() {
-        this.addChangeListener(new ChangeListener() {
+    public abstract Icon getIcon();
 
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                if (getBtnModal().isPressed()) {
-                    setIcon(getPressedImage());
-                } else {
-                    setIcon(getDefaultIcon());
-                }
-            }
+    public abstract Icon getPressedIcon();
 
-        });
-    }
+    public abstract Icon getDisabledIcon();
 
-    public ButtonModel getBtnModal() {
-        return this.getModel();
-    }
-
-    public abstract ImageIcon getDefaultIcon();
-
-    public abstract ImageIcon getPressedImage();
+    public abstract Color getBackgroundColour();
 
 }

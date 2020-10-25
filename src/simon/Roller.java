@@ -3,10 +3,16 @@
  */
 package simon;
 
+import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import simon.models.GameModel;
 
@@ -19,7 +25,51 @@ public class Roller {
 
     public static void main(String[] args) {
         Roller r = new Roller();
-        r.run();
+        r.test();
+    }
+
+    public void test() {
+        JFrame frame = new JFrame();
+        JPanel panel = new JPanel();
+        panel.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("clicked");
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
+        frame.setBounds(100, 100, 100, 100);
+        frame.add(panel);
+        panel.setBackground(Color.RED);
+        // panel.removeMouseListener();
+        // panel.setEnabled(false);
+        frame.setVisible(true);
     }
 
     public void run() {

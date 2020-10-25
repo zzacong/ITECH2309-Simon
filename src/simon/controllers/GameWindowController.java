@@ -5,10 +5,10 @@ package simon.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import javax.swing.Timer;
 
 import simon.models.Colour;
 import simon.models.GameModel;
@@ -25,14 +25,17 @@ public class GameWindowController {
     private GameModel app;
     private GameWindow view;
     private IGameState currentState = new GameLockedState();
-    private boolean busy;
-    private boolean stillRunning;
-    private Iterator<COLOUR> iter;
+    Timer backgroundTimer;
+    // private Iterator<COLOUR> iter;
+    PlaySequenceListener sequencePlayer;
+    private boolean busy = true;
     private int counter;
+    private int speed = 1000;
 
     public GameWindowController(GameModel app, GameWindow view) {
         this.setApp(app);
         this.setView(view);
+        this.sequencePlayer = new PlaySequenceListener(this);
     }
 
     public boolean isBusy() {
@@ -59,14 +62,6 @@ public class GameWindowController {
         this.app = app;
     }
 
-    public boolean getStillRunning() {
-        return this.stillRunning;
-    }
-
-    public void setStillRunning(boolean b) {
-        this.stillRunning = b;
-    }
-
     public int getCounter() {
         return this.counter;
     }
@@ -75,21 +70,33 @@ public class GameWindowController {
         this.counter = i;
     }
 
-    public ArrayList<Button> getButtons() {
+    public int getSpeed() {
+        return this.speed;
+    }
+
+    public void speedUp() {
+        this.speed -= 100;
+    }
+
+    public void resetSpeed() {
+        this.speed = 1000;
+    }
+
+    public ArrayList<Button> getColourButtons() {
         return this.view.getColourButtons();
     }
 
-    public Iterator<COLOUR> getNewIter() {
-        return app.getSequence().iterator();
-    }
+    // public Iterator<COLOUR> getNewIter() {
+    // return app.getNewSequenceIterator();
+    // }
 
-    public Iterator<COLOUR> getIter() {
-        return this.iter;
-    }
+    // public Iterator<COLOUR> getIter() {
+    // return this.iter;
+    // }
 
-    public void resetIter() {
-        this.iter = getNewIter();
-    }
+    // public void resetIter() {
+    // this.iter = getNewIter();
+    // }
 
     public void checkState() {
         this.currentState.play(this);
@@ -100,40 +107,26 @@ public class GameWindowController {
     }
 
     public void control() {
-        controlWindow();
         controlStart();
         controlExit();
         controlButton();
+        controlState();
     }
 
     public void operate() {
-
+        setBusy(true);
         newRound();
-        // setStillRunning(true);
-        // while (getStillRunning()) {
-        // boolean run = true;
-        // boolean robot = true;
-        // boolean player = false;
-        // if (robot) {
-        // robot = false;
-        // playSequence();
-        // }
-        // if (player) {
-
-        // }
-        // if (!getStillRunning()) {
-        // break;
-        // }
-        // }
     }
 
     public void newRound() {
         setCounter(0);
+        resetSpeed();
         app.setRoundscore(0);
+        updateScore();
         app.clearSequences();
         app.addOneToGameSequence();
         playSequence();
-        resetIter();
+        app.resetIter();
     }
 
     public void nextLevel() {
@@ -141,42 +134,40 @@ public class GameWindowController {
         app.setRoundscore(app.getRoundscore() + 1);
         updateScore();
         app.addOneToGameSequence();
+        speedUp();
         playSequence();
-        resetIter();
+        app.resetIter();
     }
 
     public void playSequence() {
-        PlaySequenceListener p = new PlaySequenceListener(this);
-        p.start();
+        setBusy(true);
+        sequencePlayer.resetListener();
+        sequencePlayer.start();
     }
 
     public void respond(COLOUR colour) {
-        System.out.println("respond");
-        boolean match = true;
-        if (getCounter() < app.getSequenceSize()) {
-            System.out.println("smaller");
-            if (getIter().hasNext()) {
-                System.out.println("has next");
-                match = Colour.compareColour(getIter().next(), colour);
-            }
-            if (!match) {
+        setCounter(getCounter() + 1);
+        System.out.println("respond " + getCounter());
+        boolean match = false;
+        if (app.getIter().hasNext()) { // safe check
+            match = Colour.compareColour(app.getIter().next(), colour);
+            if (match) {
+                if (!app.getIter().hasNext()) {
+                    System.out.println("next level");
+                    nextLevel();
+                }
+            } else {
                 System.out.println("not match");
                 closeRound();
             }
-            setCounter(getCounter() + 1);
-            if (getCounter() >= app.getSequenceSize()) {
-                System.out.println("next level");
-                nextLevel();
-            }
-        } else {
-            System.out.println("larger");
-            nextLevel();
         }
     }
 
     public void closeRound() {
+        setBusy(true);
         app.setHighscore(app.getRoundscore());
         updateScore();
+        view.setMessage("You lose. Play again?");
         view.getBtnStart().setText("Play again");
         view.getBtnStart().setEnabled(true);
     }
@@ -197,7 +188,8 @@ public class GameWindowController {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                view.getBtnStart().setText("Start");
+                view.setMessage("Playing...");
+                view.getBtnStart().setText("Play");
                 view.getBtnStart().setEnabled(false);
                 operate();
             }
@@ -210,60 +202,24 @@ public class GameWindowController {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                backgroundTimer.stop();
                 view.getFrame().dispose();
             }
 
         });
     }
 
-    public void controlWindow() {
-        view.getFrame().addWindowListener(new WindowListener() {
+    public void controlState() {
+        ActionListener taskPerformer = new ActionListener() {
 
             @Override
-            public void windowOpened(WindowEvent e) {
-                // TODO Auto-generated method stub
+            public void actionPerformed(ActionEvent e) {
+                checkState();
             }
 
-            @Override
-            public void windowClosing(WindowEvent e) {
-                // TODO Auto-generated method stub
-                setStillRunning(false);
-            }
-
-            @Override
-            public void windowClosed(WindowEvent e) {
-                // TODO Auto-generated method stub
-                setStillRunning(false);
-            }
-
-            @Override
-            public void windowIconified(WindowEvent e) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-                // TODO Auto-generated method stub
-            }
-
-        });
+        };
+        backgroundTimer = new Timer(100, taskPerformer);
+        backgroundTimer.start();
     }
 
 }
-
-// * show sequence
-// * loop {
-// * get user selection
-// * check sequence
-// * }

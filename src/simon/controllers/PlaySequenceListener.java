@@ -23,27 +23,26 @@ public class PlaySequenceListener implements ActionListener {
     Timer timer = new Timer(1000, this);
     GameWindowController controller;
     Iterator<COLOUR> iter;
-    ArrayList<Button> buttons;
     Button button;
 
     public PlaySequenceListener(GameWindowController controller) {
         this.controller = controller;
-        this.iter = controller.getNewIter();
-        this.buttons = controller.getButtons();
     }
 
-    public PlaySequenceListener(Iterator<COLOUR> iter, ArrayList<Button> buttons) {
-        this.iter = iter;
-        this.buttons = buttons;
+    public void resetListener() {
+        this.iter = controller.getApp().getNewSequenceIterator();
+        timer.setDelay(controller.getSpeed());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (iter.hasNext()) {
-            System.out.println("pressed");
+        if (iter.hasNext()) { // safe check
+            System.out.println(".");
             pressButton(iter.next());
         } else {
             System.out.println("stop");
+            releaseButton();
+            controller.setBusy(false);
             timer.stop();
         }
     }
@@ -52,15 +51,23 @@ public class PlaySequenceListener implements ActionListener {
         timer.start();
     }
 
+    public boolean isRunning() {
+        return this.timer.isRunning();
+    }
+
     private void pressButton(COLOUR c) {
-        if (button != null) {
-            button.setIcon(button.getDefaultIcon());
-        }
-        for (Button btn : buttons) {
+        releaseButton();
+        for (Button btn : controller.getColourButtons()) {
             if (Colour.compareColour(btn.getColour(), c)) {
-                btn.setIcon(btn.getPressedImage());
+                btn.setBackground(btn.getBackgroundColour());
                 button = btn;
             }
+        }
+    }
+
+    private void releaseButton() {
+        if (button != null) {
+            button.setBackground(null);
         }
     }
 

@@ -3,6 +3,9 @@
  */
 package simon.views;
 
+import java.awt.Color;
+
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -19,13 +22,23 @@ public class RedButton extends Button {
     }
 
     @Override
-    public ImageIcon getDefaultIcon() {
+    public ImageIcon getIcon() {
         return new ImageIcon("images/Red.png");
     }
 
     @Override
-    public ImageIcon getPressedImage() {
+    public ImageIcon getPressedIcon() {
         return new ImageIcon("images/DarkRed.png");
+    }
+
+    @Override
+    public Icon getDisabledIcon() {
+        return new ImageIcon("images/WhiteRed.png");
+    }
+
+    @Override
+    public Color getBackgroundColour() {
+        return Color.RED;
     }
 
 }

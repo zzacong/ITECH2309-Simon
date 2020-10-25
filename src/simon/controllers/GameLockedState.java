@@ -14,17 +14,17 @@ public class GameLockedState implements IGameState {
 
     @Override
     public void play(GameWindowController controller) {
-        enableAllButtons(controller.getView());
+        disableAllButtons(controller.getView());
         if (!controller.isBusy()) {
             controller.setState(new GameIdleState());
         }
     }
 
-    public void enableAllButtons(GameWindow view) {
-        view.getBtnGreen().setEnabled(true);
-        view.getBtnRed().setEnabled(true);
-        view.getBtnBlue().setEnabled(true);
-        view.getBtnYellow().setEnabled(true);
+    public void disableAllButtons(GameWindow view) {
+        view.getBtnGreen().setEnabled(false);
+        view.getBtnRed().setEnabled(false);
+        view.getBtnBlue().setEnabled(false);
+        view.getBtnYellow().setEnabled(false);
     }
 
 }

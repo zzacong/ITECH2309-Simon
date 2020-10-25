@@ -28,6 +28,7 @@ import javax.swing.SwingConstants;
 public class GameWindow {
 
     private JFrame frame;
+    private JLabel lblMessage;
     private JTextField txtRoundScore;
     private JTextField txtHighScore;
     private Button btnGreen;
@@ -64,9 +65,8 @@ public class GameWindow {
      */
     private void initialize() {
         frame = new JFrame();
-        frame.setResizable(false);
         frame.setTitle("Game Window");
-        frame.setBounds(100, 100, 450, 400);
+        frame.setBounds(100, 100, 450, 440);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.fillWindow();
         frame.setVisible(true);
@@ -99,6 +99,7 @@ public class GameWindow {
 
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc_buttonPanel = new GridBagConstraints();
+        gbc_buttonPanel.ipady = 40;
         gbc_buttonPanel.weighty = 1.0;
         gbc_buttonPanel.fill = GridBagConstraints.BOTH;
         gbc_buttonPanel.gridx = 0;
@@ -140,7 +141,7 @@ public class GameWindow {
 
         JPanel scorePanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc_scorePanel = new GridBagConstraints();
-        gbc_scorePanel.ipady = 20;
+        gbc_scorePanel.insets = new Insets(20, 0, 20, 0);
         gbc_scorePanel.fill = GridBagConstraints.BOTH;
         gbc_scorePanel.gridx = 0;
         gbc_scorePanel.gridy = 2;
@@ -186,13 +187,26 @@ public class GameWindow {
         scorePanel.add(txtHighScore, gbc_txtHighScore);
         txtHighScore.setColumns(10);
 
-        JPanel controlPanel = new JPanel(new BorderLayout());
+        lblMessage = new JLabel("Press Play to start the game!");
+        lblMessage.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+        GridBagConstraints gbc_lblMessage = new GridBagConstraints();
+        gbc_lblMessage.gridwidth = 2;
+        gbc_lblMessage.insets = new Insets(10, 0, 0, 0);
+        gbc_lblMessage.gridx = 0;
+        gbc_lblMessage.gridy = 2;
+        scorePanel.add(lblMessage, gbc_lblMessage);
+
+        BorderLayout bl_controlPanel = new BorderLayout();
+        bl_controlPanel.setHgap(20);
+        JPanel controlPanel = new JPanel(bl_controlPanel);
         GridBagConstraints gbc_controlPanel = new GridBagConstraints();
+        gbc_controlPanel.insets = new Insets(0, 0, 10, 0);
+        gbc_controlPanel.ipady = 20;
         gbc_controlPanel.gridx = 0;
         gbc_controlPanel.gridy = 3;
         mainPanel.add(controlPanel, gbc_controlPanel);
 
-        btnStart = new JButton("Start Playing");
+        btnStart = new JButton("Play");
         controlPanel.add(btnStart, BorderLayout.WEST);
 
         btnExit = new JButton("Exit");
@@ -225,6 +239,10 @@ public class GameWindow {
 
     public ArrayList<Button> getColourButtons() {
         return new ArrayList<Button>(Arrays.asList(getBtnGreen(), getBtnRed(), getBtnBlue(), getBtnYellow()));
+    }
+
+    public void setMessage(String msg) {
+        this.lblMessage.setText(msg);
     }
 
     public void setHighScore(String score) {
