@@ -5,12 +5,8 @@ package simon.views;
 
 import java.awt.Color;
 
-import javax.swing.ButtonModel;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import simon.models.Colour.COLOUR;
 

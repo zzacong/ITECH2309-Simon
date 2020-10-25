@@ -3,20 +3,10 @@
  */
 package simon.models;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Random;
-import java.util.Scanner;
-// import java.util.Timer;
-// import java.util.TimerTask;
 
-import javax.swing.Timer;
-
-import simon.controllers.PlaySequenceListener;
 import simon.models.Colour.COLOUR;
 
 /**
@@ -49,6 +39,12 @@ public class GameModel {
 
     public void setHighscore(int score) {
         this.highscore = score;
+    }
+
+    public void updateHighScore() {
+        if (getRoundscore() > getHighscore()) {
+            setHighscore(getRoundscore());
+        }
     }
 
     public int getRandInt() {

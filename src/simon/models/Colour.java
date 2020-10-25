@@ -6,8 +6,6 @@ package simon.models;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import simon.controllers.ColorButtonListener;
-
 /**
  * @author Zac
  *

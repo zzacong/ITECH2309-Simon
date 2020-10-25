@@ -6,7 +6,6 @@ package simon.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.Timer;
 
@@ -86,18 +85,6 @@ public class GameWindowController {
         return this.view.getColourButtons();
     }
 
-    // public Iterator<COLOUR> getNewIter() {
-    // return app.getNewSequenceIterator();
-    // }
-
-    // public Iterator<COLOUR> getIter() {
-    // return this.iter;
-    // }
-
-    // public void resetIter() {
-    // this.iter = getNewIter();
-    // }
-
     public void checkState() {
         this.currentState.play(this);
     }
@@ -122,7 +109,7 @@ public class GameWindowController {
         setCounter(0);
         resetSpeed();
         app.setRoundscore(0);
-        updateScore();
+        updateScoreBoard();
         app.clearSequences();
         app.addOneToGameSequence();
         playSequence();
@@ -132,7 +119,7 @@ public class GameWindowController {
     public void nextLevel() {
         setCounter(0);
         app.setRoundscore(app.getRoundscore() + 1);
-        updateScore();
+        updateScoreBoard();
         app.addOneToGameSequence();
         speedUp();
         playSequence();
@@ -165,14 +152,14 @@ public class GameWindowController {
 
     public void closeRound() {
         setBusy(true);
-        app.setHighscore(app.getRoundscore());
-        updateScore();
+        app.updateHighScore();
+        updateScoreBoard();
         view.setMessage("You lose. Play again?");
         view.getBtnStart().setText("Play again");
         view.getBtnStart().setEnabled(true);
     }
 
-    public void updateScore() {
+    public void updateScoreBoard() {
         view.setRoundScore(Integer.toString(app.getRoundscore()));
         view.setHighScore(Integer.toString(app.getHighscore()));
     }

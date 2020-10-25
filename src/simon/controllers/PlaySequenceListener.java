@@ -5,7 +5,6 @@ package simon.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.Timer;
@@ -38,10 +37,10 @@ public class PlaySequenceListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (iter.hasNext()) { // safe check
             System.out.println(".");
-            pressButton(iter.next());
+            highlightButton(iter.next());
         } else {
             System.out.println("stop");
-            releaseButton();
+            unhighlightButton();
             controller.setBusy(false);
             timer.stop();
         }
@@ -55,8 +54,8 @@ public class PlaySequenceListener implements ActionListener {
         return this.timer.isRunning();
     }
 
-    private void pressButton(COLOUR c) {
-        releaseButton();
+    private void highlightButton(COLOUR c) {
+        unhighlightButton();
         for (Button btn : controller.getColourButtons()) {
             if (Colour.compareColour(btn.getColour(), c)) {
                 btn.setBackground(btn.getBackgroundColour());
@@ -65,7 +64,7 @@ public class PlaySequenceListener implements ActionListener {
         }
     }
 
-    private void releaseButton() {
+    private void unhighlightButton() {
         if (button != null) {
             button.setBackground(null);
         }

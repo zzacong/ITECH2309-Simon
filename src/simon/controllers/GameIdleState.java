@@ -3,7 +3,6 @@
  */
 package simon.controllers;
 
-import simon.models.GameModel;
 import simon.views.GameWindow;
 
 /**

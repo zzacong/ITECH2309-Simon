@@ -7,9 +7,7 @@ import java.awt.Color;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
-import simon.models.Colour;
 import simon.models.Colour.COLOUR;
 
 /**
