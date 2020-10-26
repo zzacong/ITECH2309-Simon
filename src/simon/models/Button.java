@@ -1,14 +1,12 @@
 /**
  * 
  */
-package simon.views;
+package simon.models;
 
 import java.awt.Color;
 
 import javax.swing.Icon;
 import javax.swing.JButton;
-
-import simon.models.Colour;
 
 /**
  * @author Zac

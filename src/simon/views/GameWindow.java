@@ -18,6 +18,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import simon.models.BlueButton;
+import simon.models.Button;
+import simon.models.GreenButton;
+import simon.models.RedButton;
+import simon.models.YellowButton;
+
 import java.awt.FlowLayout;
 
 /**

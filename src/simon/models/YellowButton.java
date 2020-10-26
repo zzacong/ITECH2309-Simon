@@ -1,46 +1,45 @@
 /**
  * 
  */
-package simon.views;
+package simon.models;
 
 import java.awt.Color;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-import simon.models.Colour;
 import simon.models.Colour.Keys;
 
 /**
  * @author Zac
  *
  */
-public class BlueButton extends Button {
+public class YellowButton extends Button {
 
     private static final long serialVersionUID = 1L;
 
-    public BlueButton() {
-        super(Colour.getColour(Keys.BLUE));
+    public YellowButton() {
+        super(Colour.getColour(Keys.YELLOW));
     }
 
     @Override
     public ImageIcon getIcon() {
-        return new ImageIcon("images/Blue.png");
+        return new ImageIcon("images/Yellow.png");
     }
 
     @Override
     public ImageIcon getPressedIcon() {
-        return new ImageIcon("images/DarkBlue.png");
+        return new ImageIcon("images/DarkYellow.png");
     }
 
     @Override
     public Icon getDisabledIcon() {
-        return new ImageIcon("images/WhiteBlue.png");
+        return new ImageIcon("images/WhiteYellow.png");
     }
 
     @Override
     public Color getBackgroundColour() {
-        return Color.BLUE;
+        return Color.YELLOW;
     }
 
 }

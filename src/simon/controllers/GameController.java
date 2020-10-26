@@ -9,10 +9,9 @@ import java.util.ArrayList;
 
 import javax.swing.Timer;
 
+import simon.models.Button;
 import simon.models.Colour;
 import simon.models.GameModel;
-
-import simon.views.Button;
 import simon.views.ConfigWindow;
 import simon.views.GameWindow;
 
@@ -20,18 +19,18 @@ import simon.views.GameWindow;
  * @author Zac
  *
  */
-public class GameWindowController implements Controller {
+public class GameController implements Controller {
 
     private GameModel app;
     private GameWindow view;
     private ConfigWindow configWindow = new ConfigWindow();
-    private ConfigWindowController config = new ConfigWindowController(configWindow, this);
+    private ConfigController config = new ConfigController(configWindow, this);
     private IGameState currentState = new GameBusyState();
     private Timer backgroundTimer;
     private PlaySequenceListener sequencePlayer;
     private boolean busy = true;
 
-    public GameWindowController(GameModel app, GameWindow view) {
+    public GameController(GameModel app, GameWindow view) {
         this.setApp(app);
         this.setView(view);
         this.sequencePlayer = new PlaySequenceListener(this);

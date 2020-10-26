@@ -12,7 +12,7 @@ import simon.views.GameWindow;
 public class GameBusyState implements IGameState {
 
     @Override
-    public void play(GameWindowController controller) {
+    public void play(GameController controller) {
         disableAllButtons(controller.getView());
         if (!controller.isBusy()) {
             controller.setState(new GameIdleState());

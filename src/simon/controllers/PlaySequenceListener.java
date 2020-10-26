@@ -9,9 +9,8 @@ import java.util.Iterator;
 
 import javax.swing.Timer;
 
+import simon.models.Button;
 import simon.models.Colour;
-
-import simon.views.Button;
 
 /**
  * @author Zac
@@ -20,13 +19,13 @@ import simon.views.Button;
 public class PlaySequenceListener implements ActionListener {
 
     private Timer timer = new Timer(1000, this);
-    private GameWindowController controller;
+    private GameController controller;
     private Iterator<Colour> iter;
     private Button button;
     private boolean on;
     private int delay;
 
-    public PlaySequenceListener(GameWindowController controller) {
+    public PlaySequenceListener(GameController controller) {
         this.controller = controller;
         this.delay = controller.getApp().getSpeed();
     }

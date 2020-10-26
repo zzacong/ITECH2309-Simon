@@ -13,13 +13,13 @@ import simon.views.ConfigWindow;
  * @author Zac
  *
  */
-public class ConfigWindowController implements Controller {
+public class ConfigController implements Controller {
 
     private ConfigWindow view;
-    private GameWindowController game;
+    private GameController game;
     private String playerName;
 
-    public ConfigWindowController(ConfigWindow view, GameWindowController game) {
+    public ConfigController(ConfigWindow view, GameController game) {
         this.view = view;
         this.game = game;
     }
