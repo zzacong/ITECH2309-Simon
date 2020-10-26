@@ -5,7 +5,6 @@ package simon.models;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 
 import simon.models.Colour.Keys;
 
@@ -17,9 +16,13 @@ public class GameModel {
 
     private ArrayList<Colour> gameSequence;
 
+    private Iterator<Colour> iter;
     private int roundscore;
     private int highscore;
-    private Iterator<Colour> iter;
+    private int counter;
+    private int speed;
+    private int initialNumber;
+    private int initialSpeed;
 
     public GameModel() {
         gameSequence = new ArrayList<Colour>();
@@ -31,6 +34,10 @@ public class GameModel {
 
     public void setRoundscore(int score) {
         this.roundscore = score;
+    }
+
+    public void incrementRoundScore() {
+        this.roundscore++;
     }
 
     public int getHighscore() {
@@ -47,31 +54,57 @@ public class GameModel {
         }
     }
 
-    public int getRandInt() {
-        Random r = new Random();
-        return r.nextInt(4);
+    public int getCounter() {
+        return this.counter;
+    }
+
+    public void setCounter(int i) {
+        this.counter = i;
+    }
+
+    public void incrementCounter() {
+        this.counter++;
+    }
+
+    public int getInitialSpeed() {
+        return this.initialSpeed;
+    }
+
+    public void setInitialSpeed(int speed) {
+        this.initialSpeed = speed;
+    }
+
+    public int getSpeed() {
+        return this.speed;
+    }
+
+    public void speedUp() {
+        this.speed -= 100;
+    }
+
+    public void resetSpeed() {
+        this.speed = getInitialSpeed();
+    }
+
+    public int getInitialNumber() {
+        return initialNumber;
+    }
+
+    public void setInitialNumber(int initialNumber) {
+        this.initialNumber = initialNumber;
     }
 
     public Colour getRandomColour() {
         return Colour.getColour(Keys.getRandomKey());
     }
 
-    public void addSequence(ArrayList<Colour> sequence, Colour color) {
-        sequence.add(color);
-    }
-
     public void addOneToGameSequence() {
-        this.addSequence(getSequence(), getRandomColour());
+        gameSequence.add(getRandomColour());
     }
 
-    public void clearSequences() {
+    public void clearSequence() {
         gameSequence.clear();
     }
-
-    // public Colour getNextSequence() {
-    // Iterator<Colour> iter = gameSequence.iterator();
-    // return iter.hasNext() ? iter.next() : null;
-    // }
 
     public ArrayList<Colour> getSequence() {
         return this.gameSequence;

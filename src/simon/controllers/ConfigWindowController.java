@@ -86,8 +86,8 @@ public class ConfigWindowController implements Controller {
                     System.out.println(number);
 
                     setPlayerName(name);
-                    game.setInitialSpeed(speed);
-                    game.setInitialNumber(number);
+                    game.getApp().setInitialSpeed(speed);
+                    game.getApp().setInitialNumber(number);
                     game.readyToPlay(true);
 
                     view.getFrame().setVisible(false);

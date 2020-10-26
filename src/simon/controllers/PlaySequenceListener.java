@@ -24,14 +24,16 @@ public class PlaySequenceListener implements ActionListener {
     private Iterator<Colour> iter;
     private Button button;
     private boolean on;
+    private int delay;
 
     public PlaySequenceListener(GameWindowController controller) {
         this.controller = controller;
+        this.delay = controller.getApp().getSpeed();
     }
 
     public void resetListener() {
         this.iter = controller.getApp().getNewSequenceIterator();
-        timer.setDelay(controller.getSpeed());
+        timer.setDelay(delay);
     }
 
     @Override
@@ -48,7 +50,7 @@ public class PlaySequenceListener implements ActionListener {
             }
         } else {
             on = true;
-            timer.setDelay(controller.getSpeed());
+            timer.setDelay(delay);
             unhighlightButton();
         }
     }
