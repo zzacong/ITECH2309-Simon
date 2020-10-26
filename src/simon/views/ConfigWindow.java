@@ -2,7 +2,6 @@ package simon.views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -33,18 +32,18 @@ public class ConfigWindow {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    ConfigWindow window = new ConfigWindow();
-                    window.frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+    // public static void main(String[] args) {
+    // EventQueue.invokeLater(new Runnable() {
+    // public void run() {
+    // try {
+    // ConfigWindow window = new ConfigWindow();
+    // window.frame.setVisible(true);
+    // } catch (Exception e) {
+    // e.printStackTrace();
+    // }
+    // }
+    // });
+    // }
 
     /**
      * Create the application.

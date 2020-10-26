@@ -21,7 +21,6 @@ public class TableLeadership extends JTable {
 
     private static final long serialVersionUID = 1L;
     private TableRowSorter<TableModel> sorter;
-    Object[][] data = { { "Kathy", 2 }, { "John", 8 }, { "Sue", 5 }, { "Jane", 3 }, { "Joe", 4 } };
     private String[] columnNames = { "Name", "Highscores" };
 
     public TableLeadership() {
@@ -41,7 +40,8 @@ public class TableLeadership extends JTable {
     }
 
     private void initialize() {
-        TableModel model = new DefaultTableModel(data, columnNames);
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(columnNames);
         setModel(model);
         setRowSelectionAllowed(false);
         setFillsViewportHeight(true);

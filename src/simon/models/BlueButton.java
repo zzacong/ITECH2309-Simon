@@ -1,14 +1,15 @@
 /**
  * 
  */
-package simon.views;
+package simon.models;
 
 import java.awt.Color;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
-import simon.models.Colour.COLOUR;
+import simon.models.Colour.Keys;
 
 /**
  * @author Zac
@@ -19,7 +20,11 @@ public class BlueButton extends Button {
     private static final long serialVersionUID = 1L;
 
     public BlueButton() {
-        super(COLOUR.BLUE);
+        super(Colour.getColour(Keys.BLUE));
+    }
+
+    public BlueButton(JButton button) {
+        super(Colour.getColour(Keys.BLUE), button);
     }
 
     @Override

@@ -7,12 +7,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.Timer;
 
+import simon.models.BlueButton;
+import simon.models.Button;
 import simon.models.Colour;
 import simon.models.GameModel;
-import simon.models.Colour.COLOUR;
-import simon.views.Button;
+import simon.models.GreenButton;
+import simon.models.RedButton;
+import simon.models.YellowButton;
 import simon.views.ConfigWindow;
 import simon.views.GameWindow;
 
@@ -20,22 +24,19 @@ import simon.views.GameWindow;
  * @author Zac
  *
  */
-public class GameWindowController implements Controller {
+public class GameController implements Controller {
 
     private GameModel app;
     private GameWindow view;
     private ConfigWindow configWindow = new ConfigWindow();
-    private ConfigWindowController config = new ConfigWindowController(configWindow, this);
+    private ConfigController config = new ConfigController(configWindow, this);
     private IGameState currentState = new GameBusyState();
     private Timer backgroundTimer;
     private PlaySequenceListener sequencePlayer;
+    private ArrayList<Button> colourButtons = new ArrayList<Button>();
     private boolean busy = true;
-    private int counter;
-    private int speed;
-    private int initialNumber;
-    private int initialSpeed;
 
-    public GameWindowController(GameModel app, GameWindow view) {
+    public GameController(GameModel app, GameWindow view) {
         this.setApp(app);
         this.setView(view);
         this.sequencePlayer = new PlaySequenceListener(this);
@@ -66,44 +67,8 @@ public class GameWindowController implements Controller {
         this.app = app;
     }
 
-    public int getCounter() {
-        return this.counter;
-    }
-
-    public void setCounter(int i) {
-        this.counter = i;
-    }
-
-    public int getInitialSpeed() {
-        return this.initialSpeed;
-    }
-
-    public void setInitialSpeed(int speed) {
-        this.initialSpeed = speed;
-    }
-
-    public int getSpeed() {
-        return this.speed;
-    }
-
-    public void speedUp() {
-        this.speed -= 100;
-    }
-
-    public void resetSpeed() {
-        this.speed = getInitialSpeed();
-    }
-
-    public int getInitialNumber() {
-        return initialNumber;
-    }
-
-    public void setInitialNumber(int initialNumber) {
-        this.initialNumber = initialNumber;
-    }
-
     public ArrayList<Button> getColourButtons() {
-        return this.view.getColourButtons();
+        return this.colourButtons;
     }
 
     public void checkState() {
@@ -120,12 +85,12 @@ public class GameWindowController implements Controller {
     }
 
     public void newRound() {
-        setCounter(0);
-        resetSpeed();
+        app.setCounter(0);
+        app.resetSpeed();
         app.setRoundscore(0);
         updateScoreBoard();
-        app.clearSequences();
-        for (int i = 0; i < getInitialNumber(); i++) {
+        app.clearSequence();
+        for (int i = 0; i < app.getInitialNumber(); i++) {
             app.addOneToGameSequence();
         }
         playSequence();
@@ -133,11 +98,11 @@ public class GameWindowController implements Controller {
     }
 
     public void nextLevel() {
-        setCounter(0);
-        app.setRoundscore(app.getRoundscore() + 1);
+        app.setCounter(0);
+        app.incrementRoundScore();
         updateScoreBoard();
         app.addOneToGameSequence();
-        speedUp();
+        app.speedUp();
         playSequence();
         app.resetIter();
     }
@@ -148,12 +113,12 @@ public class GameWindowController implements Controller {
         sequencePlayer.start();
     }
 
-    public void respond(COLOUR colour) {
-        setCounter(getCounter() + 1);
-        System.out.println("respond " + getCounter());
+    public void respond(Colour colour) {
+        app.incrementCounter();
+        System.out.println("respond " + app.getCounter());
         boolean match = false;
         if (app.getIter().hasNext()) { // safe check
-            match = Colour.compareColour(app.getIter().next(), colour);
+            match = colour.equals(app.getIter().next());
             if (match) {
                 if (!app.getIter().hasNext()) {
                     System.out.println("next level");
@@ -168,8 +133,8 @@ public class GameWindowController implements Controller {
 
     public void closeRound() {
         setBusy(true);
-        if (getInitialNumber() > 0) {
-            app.setRoundscore(app.getRoundscore() + getInitialNumber() - 1);
+        if (app.getInitialNumber() > 0) {
+            app.setRoundscore(app.getRoundscore() + app.getInitialNumber() - 1);
         }
         app.updateHighScore();
         updateScoreBoard();
@@ -199,8 +164,26 @@ public class GameWindowController implements Controller {
     }
 
     public void controlButton() {
-        for (Button button : view.getColourButtons()) {
-            button.addActionListener(new ColorButtonListener(this, button));
+        int i = 0;
+        for (JButton btn : view.getColourButtons()) {
+            Button button = null;
+            switch (i) {
+                case 0:
+                    button = new GreenButton(btn);
+                    break;
+                case 1:
+                    button = new RedButton(btn);
+                    break;
+                case 2:
+                    button = new YellowButton(btn);
+                    break;
+                case 3:
+                    button = new BlueButton(btn);
+                    break;
+            }
+            getColourButtons().add(button);
+            btn.addActionListener(new ColorButtonListener(this, button));
+            i++;
         }
     }
 

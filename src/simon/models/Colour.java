@@ -3,8 +3,8 @@
  */
 package simon.models;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Random;
 
 /**
  * @author Zac
@@ -12,19 +12,28 @@ import java.util.Arrays;
  */
 public class Colour {
 
-    public static enum COLOUR {
-        GREEN, RED, BLUE, YELLOW
+    private static Random r = new Random();
+
+    public static enum Keys {
+        GREEN, RED, BLUE, YELLOW;
+
+        public static Keys getRandomKey() {
+            return values()[r.nextInt(4)];
+        }
     };
 
-    private static ArrayList<COLOUR> colourList = new ArrayList<COLOUR>(
-            Arrays.asList(COLOUR.GREEN, COLOUR.RED, COLOUR.BLUE, COLOUR.YELLOW));
+    private static final HashMap<Keys, Colour> COLOUR = new HashMap<Keys, Colour>();
 
-    public static COLOUR getColour(int index) {
-        return colourList.get(index);
+    private Colour() {
     }
 
-    public static boolean compareColour(COLOUR c1, COLOUR c2) {
-        return c1 == c2;
+    public static Colour getColour(Keys key) {
+        Colour instance = COLOUR.get(key);
+        if (instance == null) {
+            instance = new Colour();
+            COLOUR.put(key, instance);
+        }
+        return instance;
     }
 
 }

@@ -1,13 +1,14 @@
 /**
  * 
  */
-package simon.views;
+package simon.models;
 
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
-import simon.models.Colour.COLOUR;
+import simon.models.Colour.Keys;
 
 /**
  * @author Zac
@@ -18,7 +19,11 @@ public class GreenButton extends Button {
     private static final long serialVersionUID = 1L;
 
     public GreenButton() {
-        super(COLOUR.GREEN);
+        super(Colour.getColour(Keys.GREEN));
+    }
+
+    public GreenButton(JButton button) {
+        super(Colour.getColour(Keys.GREEN), button);
     }
 
     @Override

@@ -9,9 +9,8 @@ import java.util.Iterator;
 
 import javax.swing.Timer;
 
+import simon.models.Button;
 import simon.models.Colour;
-import simon.models.Colour.COLOUR;
-import simon.views.Button;
 
 /**
  * @author Zac
@@ -20,18 +19,21 @@ import simon.views.Button;
 public class PlaySequenceListener implements ActionListener {
 
     private Timer timer = new Timer(1000, this);
-    private GameWindowController controller;
-    private Iterator<COLOUR> iter;
+    private GameController controller;
+    private Iterator<Colour> iter;
     private Button button;
     private boolean on;
+    private int delay;
 
-    public PlaySequenceListener(GameWindowController controller) {
+    public PlaySequenceListener(GameController controller) {
         this.controller = controller;
     }
 
     public void resetListener() {
         this.iter = controller.getApp().getNewSequenceIterator();
-        timer.setDelay(controller.getSpeed());
+        this.on = true;
+        this.delay = controller.getApp().getSpeed();
+        this.timer.setDelay(delay);
     }
 
     @Override
@@ -48,7 +50,7 @@ public class PlaySequenceListener implements ActionListener {
             }
         } else {
             on = true;
-            timer.setDelay(controller.getSpeed());
+            timer.setDelay(delay);
             unhighlightButton();
         }
     }
@@ -57,11 +59,11 @@ public class PlaySequenceListener implements ActionListener {
         timer.start();
     }
 
-    private void highlightButton(COLOUR c) {
+    private void highlightButton(Colour c) {
         for (Button btn : controller.getColourButtons()) {
-            if (Colour.compareColour(btn.getColour(), c)) {
+            if (c.equals(btn.getColour())) {
                 System.out.println(".");
-                btn.setBackground(btn.getBackgroundColour());
+                btn.getButton().setBackground(btn.getBackgroundColour());
                 button = btn;
             }
         }
@@ -69,7 +71,7 @@ public class PlaySequenceListener implements ActionListener {
 
     private void unhighlightButton() {
         if (button != null) {
-            button.setBackground(null);
+            button.getButton().setBackground(null);
         }
     }
 

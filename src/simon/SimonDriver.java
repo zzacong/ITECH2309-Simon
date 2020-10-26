@@ -6,7 +6,7 @@ package simon;
 import javax.swing.SwingUtilities;
 
 import simon.controllers.Controller;
-import simon.controllers.GameWindowController;
+import simon.controllers.GameController;
 import simon.models.GameModel;
 import simon.views.GameWindow;
 
@@ -22,7 +22,7 @@ public class SimonDriver {
             public void run() {
                 GameWindow gameWindow = new GameWindow();
                 GameModel app = new GameModel();
-                Controller gameController = new GameWindowController(app, gameWindow);
+                Controller gameController = new GameController(app, gameWindow);
 
                 gameController.control();
             }

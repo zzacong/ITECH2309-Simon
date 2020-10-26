@@ -13,13 +13,13 @@ import simon.views.ConfigWindow;
  * @author Zac
  *
  */
-public class ConfigWindowController implements Controller {
+public class ConfigController implements Controller {
 
     private ConfigWindow view;
-    private GameWindowController game;
+    private GameController game;
     private String playerName;
 
-    public ConfigWindowController(ConfigWindow view, GameWindowController game) {
+    public ConfigController(ConfigWindow view, GameController game) {
         this.view = view;
         this.game = game;
     }
@@ -79,15 +79,13 @@ public class ConfigWindowController implements Controller {
             public void actionPerformed(ActionEvent e) {
                 if (validateInput()) {
                     String name = view.getTxtName().getText();
-                    int speed = (int) ((view.getCbxSpeed().getSelectedIndex() + 1) * 0.6 * 1000);
+                    int speed = view.getCbxSpeed().getSelectedIndex();
                     int number = (int) view.getCbxButtonNumber().getSelectedItem();
-                    System.out.println(name);
                     System.out.println(speed);
-                    System.out.println(number);
 
                     setPlayerName(name);
-                    game.setInitialSpeed(speed);
-                    game.setInitialNumber(number);
+                    game.getApp().setInitialSpeed(speed);
+                    game.getApp().setInitialNumber(number);
                     game.readyToPlay(true);
 
                     view.getFrame().setVisible(false);

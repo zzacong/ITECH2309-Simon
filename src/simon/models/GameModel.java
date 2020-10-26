@@ -4,10 +4,10 @@
 package simon.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
-import java.util.Random;
 
-import simon.models.Colour.COLOUR;
+import simon.models.Colour.Keys;
 
 /**
  * @author Zac
@@ -15,14 +15,19 @@ import simon.models.Colour.COLOUR;
  */
 public class GameModel {
 
-    private ArrayList<COLOUR> gameSequence;
+    private static final ArrayList<Integer> SPEED = new ArrayList<Integer>(Arrays.asList(800, 1000, 1400));
 
+    private ArrayList<Colour> gameSequence;
+    private Iterator<Colour> iter;
     private int roundscore;
     private int highscore;
-    private Iterator<COLOUR> iter;
+    private int counter;
+    private int speed;
+    private int initialNumber;
+    private int initialSpeed;
 
     public GameModel() {
-        gameSequence = new ArrayList<COLOUR>();
+        gameSequence = new ArrayList<Colour>();
     }
 
     public int getRoundscore() {
@@ -31,6 +36,10 @@ public class GameModel {
 
     public void setRoundscore(int score) {
         this.roundscore = score;
+    }
+
+    public void incrementRoundScore() {
+        this.roundscore++;
     }
 
     public int getHighscore() {
@@ -47,41 +56,67 @@ public class GameModel {
         }
     }
 
-    public int getRandInt() {
-        Random r = new Random();
-        return r.nextInt(4);
+    public int getCounter() {
+        return this.counter;
     }
 
-    public COLOUR getRandomColour() {
-        return Colour.getColour(getRandInt());
+    public void setCounter(int i) {
+        this.counter = i;
     }
 
-    public void addSequence(ArrayList<COLOUR> sequence, COLOUR color) {
-        sequence.add(color);
+    public void incrementCounter() {
+        this.counter++;
+    }
+
+    public int getInitialSpeed() {
+        return this.initialSpeed;
+    }
+
+    public void setInitialSpeed(int index) {
+        this.initialSpeed = SPEED.get(index);
+    }
+
+    public int getSpeed() {
+        return this.speed;
+    }
+
+    public void speedUp() {
+        this.speed -= 100;
+    }
+
+    public void resetSpeed() {
+        this.speed = getInitialSpeed();
+    }
+
+    public int getInitialNumber() {
+        return initialNumber;
+    }
+
+    public void setInitialNumber(int initialNumber) {
+        this.initialNumber = initialNumber;
+    }
+
+    public Colour getRandomColour() {
+        return Colour.getColour(Keys.getRandomKey());
     }
 
     public void addOneToGameSequence() {
-        this.addSequence(getSequence(), getRandomColour());
+        gameSequence.add(getRandomColour());
     }
 
-    public void clearSequences() {
+    public void clearSequence() {
         gameSequence.clear();
     }
 
-    // public COLOUR getNextSequence() {
-    // Iterator<COLOUR> iter = gameSequence.iterator();
-    // return iter.hasNext() ? iter.next() : null;
-    // }
-
-    public ArrayList<COLOUR> getSequence() {
+    public ArrayList<Colour> getSequence() {
         return this.gameSequence;
     }
 
-    public Iterator<COLOUR> getNewSequenceIterator() {
+    public Iterator<Colour> getNewSequenceIterator() {
         return getSequence().iterator();
     }
 
-    public Iterator<COLOUR> getIter() {
+    public Iterator<Colour> getIter() {
         return this.iter;
     }
 

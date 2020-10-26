@@ -9,5 +9,5 @@ package simon.controllers;
  */
 public interface IGameState {
 
-    public void play(GameWindowController controller);
+    public void play(GameController controller);
 }
