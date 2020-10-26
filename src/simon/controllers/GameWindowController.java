@@ -11,7 +11,7 @@ import javax.swing.Timer;
 
 import simon.models.Colour;
 import simon.models.GameModel;
-import simon.models.Colour.COLOUR;
+
 import simon.views.Button;
 import simon.views.ConfigWindow;
 import simon.views.GameWindow;
@@ -148,12 +148,12 @@ public class GameWindowController implements Controller {
         sequencePlayer.start();
     }
 
-    public void respond(COLOUR colour) {
+    public void respond(Colour colour) {
         setCounter(getCounter() + 1);
         System.out.println("respond " + getCounter());
         boolean match = false;
         if (app.getIter().hasNext()) { // safe check
-            match = Colour.compareColour(app.getIter().next(), colour);
+            match = colour.equals(app.getIter().next());
             if (match) {
                 if (!app.getIter().hasNext()) {
                     System.out.println("next level");

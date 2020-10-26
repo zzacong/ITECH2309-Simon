@@ -10,7 +10,7 @@ import java.util.Iterator;
 import javax.swing.Timer;
 
 import simon.models.Colour;
-import simon.models.Colour.COLOUR;
+
 import simon.views.Button;
 
 /**
@@ -21,7 +21,7 @@ public class PlaySequenceListener implements ActionListener {
 
     private Timer timer = new Timer(1000, this);
     private GameWindowController controller;
-    private Iterator<COLOUR> iter;
+    private Iterator<Colour> iter;
     private Button button;
     private boolean on;
 
@@ -57,9 +57,9 @@ public class PlaySequenceListener implements ActionListener {
         timer.start();
     }
 
-    private void highlightButton(COLOUR c) {
+    private void highlightButton(Colour c) {
         for (Button btn : controller.getColourButtons()) {
-            if (Colour.compareColour(btn.getColour(), c)) {
+            if (c.equals(btn.getColour())) {
                 System.out.println(".");
                 btn.setBackground(btn.getBackgroundColour());
                 button = btn;

@@ -3,9 +3,6 @@
  */
 package simon;
 
-import java.awt.Color;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Timer;
@@ -13,6 +10,9 @@ import java.util.TimerTask;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import simon.models.Colour;
+import simon.models.Colour.Keys;
 
 /**
  * @author Zac
@@ -22,8 +22,8 @@ public class Roller {
     ArrayList<String> string = new ArrayList<String>();
 
     public static void main(String[] args) {
-        Roller r = new Roller();
-
+        // Roller r = new Roller();
+        // System.out.println(Colour.getColour(Keys.GREEN).equals(Colour.getColour(Keys.BLUE)));
     }
 
     public void run() {

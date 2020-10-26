@@ -8,7 +8,7 @@ import java.awt.Color;
 import javax.swing.Icon;
 import javax.swing.JButton;
 
-import simon.models.Colour.COLOUR;
+import simon.models.Colour;
 
 /**
  * @author Zac
@@ -17,17 +17,17 @@ import simon.models.Colour.COLOUR;
 public abstract class Button extends JButton {
 
     private static final long serialVersionUID = 1L;
-    private COLOUR colour;
+    private Colour colour;
 
-    public Button(COLOUR colour) {
+    public Button(Colour colour) {
         this.setColour(colour);
     }
 
-    public COLOUR getColour() {
+    public Colour getColour() {
         return this.colour;
     }
 
-    public void setColour(COLOUR colour) {
+    public void setColour(Colour colour) {
         this.colour = colour;
     }
 

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import simon.models.Colour.COLOUR;
+import simon.models.Colour.Keys;
 
 /**
  * @author Zac
@@ -15,14 +15,14 @@ import simon.models.Colour.COLOUR;
  */
 public class GameModel {
 
-    private ArrayList<COLOUR> gameSequence;
+    private ArrayList<Colour> gameSequence;
 
     private int roundscore;
     private int highscore;
-    private Iterator<COLOUR> iter;
+    private Iterator<Colour> iter;
 
     public GameModel() {
-        gameSequence = new ArrayList<COLOUR>();
+        gameSequence = new ArrayList<Colour>();
     }
 
     public int getRoundscore() {
@@ -52,11 +52,11 @@ public class GameModel {
         return r.nextInt(4);
     }
 
-    public COLOUR getRandomColour() {
-        return Colour.getColour(getRandInt());
+    public Colour getRandomColour() {
+        return Colour.getColour(Keys.getRandomKey());
     }
 
-    public void addSequence(ArrayList<COLOUR> sequence, COLOUR color) {
+    public void addSequence(ArrayList<Colour> sequence, Colour color) {
         sequence.add(color);
     }
 
@@ -68,20 +68,20 @@ public class GameModel {
         gameSequence.clear();
     }
 
-    // public COLOUR getNextSequence() {
-    // Iterator<COLOUR> iter = gameSequence.iterator();
+    // public Colour getNextSequence() {
+    // Iterator<Colour> iter = gameSequence.iterator();
     // return iter.hasNext() ? iter.next() : null;
     // }
 
-    public ArrayList<COLOUR> getSequence() {
+    public ArrayList<Colour> getSequence() {
         return this.gameSequence;
     }
 
-    public Iterator<COLOUR> getNewSequenceIterator() {
+    public Iterator<Colour> getNewSequenceIterator() {
         return getSequence().iterator();
     }
 
-    public Iterator<COLOUR> getIter() {
+    public Iterator<Colour> getIter() {
         return this.iter;
     }
 

@@ -8,7 +8,8 @@ import java.awt.Color;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-import simon.models.Colour.COLOUR;
+import simon.models.Colour;
+import simon.models.Colour.Keys;
 
 /**
  * @author Zac
@@ -19,7 +20,7 @@ public class BlueButton extends Button {
     private static final long serialVersionUID = 1L;
 
     public BlueButton() {
-        super(COLOUR.BLUE);
+        super(Colour.getColour(Keys.BLUE));
     }
 
     @Override
