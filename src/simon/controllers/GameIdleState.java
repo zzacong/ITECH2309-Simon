@@ -15,7 +15,7 @@ public class GameIdleState implements IGameState {
     public void play(GameWindowController controller) {
         enableAllButtons(controller.getView());
         if (controller.isBusy()) {
-            controller.setState(new GameLockedState());
+            controller.setState(new GameBusyState());
         }
     }
 

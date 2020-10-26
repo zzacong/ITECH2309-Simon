@@ -13,28 +13,33 @@ import simon.models.Colour;
 import simon.models.GameModel;
 import simon.models.Colour.COLOUR;
 import simon.views.Button;
+import simon.views.ConfigWindow;
 import simon.views.GameWindow;
 
 /**
  * @author Zac
  *
  */
-public class GameWindowController {
+public class GameWindowController implements Controller {
 
     private GameModel app;
     private GameWindow view;
-    private IGameState currentState = new GameLockedState();
-    Timer backgroundTimer;
-    // private Iterator<COLOUR> iter;
-    PlaySequenceListener sequencePlayer;
+    private ConfigWindow configWindow = new ConfigWindow();
+    private ConfigWindowController config = new ConfigWindowController(configWindow, this);
+    private IGameState currentState = new GameBusyState();
+    private Timer backgroundTimer;
+    private PlaySequenceListener sequencePlayer;
     private boolean busy = true;
     private int counter;
-    private int speed = 1000;
+    private int speed;
+    private int initialNumber;
+    private int initialSpeed;
 
     public GameWindowController(GameModel app, GameWindow view) {
         this.setApp(app);
         this.setView(view);
         this.sequencePlayer = new PlaySequenceListener(this);
+        config.control();
     }
 
     public boolean isBusy() {
@@ -69,6 +74,14 @@ public class GameWindowController {
         this.counter = i;
     }
 
+    public int getInitialSpeed() {
+        return this.initialSpeed;
+    }
+
+    public void setInitialSpeed(int speed) {
+        this.initialSpeed = speed;
+    }
+
     public int getSpeed() {
         return this.speed;
     }
@@ -78,7 +91,15 @@ public class GameWindowController {
     }
 
     public void resetSpeed() {
-        this.speed = 1000;
+        this.speed = getInitialSpeed();
+    }
+
+    public int getInitialNumber() {
+        return initialNumber;
+    }
+
+    public void setInitialNumber(int initialNumber) {
+        this.initialNumber = initialNumber;
     }
 
     public ArrayList<Button> getColourButtons() {
@@ -93,14 +114,7 @@ public class GameWindowController {
         this.currentState = state;
     }
 
-    public void control() {
-        controlStart();
-        controlExit();
-        controlButton();
-        controlState();
-    }
-
-    public void operate() {
+    public void play() {
         setBusy(true);
         newRound();
     }
@@ -111,7 +125,9 @@ public class GameWindowController {
         app.setRoundscore(0);
         updateScoreBoard();
         app.clearSequences();
-        app.addOneToGameSequence();
+        for (int i = 0; i < getInitialNumber(); i++) {
+            app.addOneToGameSequence();
+        }
         playSequence();
         app.resetIter();
     }
@@ -152,16 +168,34 @@ public class GameWindowController {
 
     public void closeRound() {
         setBusy(true);
+        if (getInitialNumber() > 0) {
+            app.setRoundscore(app.getRoundscore() + getInitialNumber() - 1);
+        }
         app.updateHighScore();
         updateScoreBoard();
+        config.addRow(app.getRoundscore());
         view.setMessage("You lose. Play again?");
         view.getBtnStart().setText("Play again");
-        view.getBtnStart().setEnabled(true);
+        readyToPlay(false);
     }
 
     public void updateScoreBoard() {
         view.setRoundScore(Integer.toString(app.getRoundscore()));
         view.setHighScore(Integer.toString(app.getHighscore()));
+    }
+
+    public void readyToPlay(boolean ready) {
+        view.getBtnStart().setEnabled(!ready);
+        view.getBtnPlay().setEnabled(ready);
+    }
+
+    @Override
+    public void control() {
+        controlStart();
+        controlExit();
+        controlPlay();
+        controlButton();
+        controlState();
     }
 
     public void controlButton() {
@@ -175,10 +209,21 @@ public class GameWindowController {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                view.setMessage("Playing...");
-                view.getBtnStart().setText("Play");
                 view.getBtnStart().setEnabled(false);
-                operate();
+                config.showFrame();
+            }
+
+        });
+    }
+
+    public void controlPlay() {
+        view.getBtnPlay().addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.setMessage("Playing...");
+                view.getBtnPlay().setEnabled(false);
+                play();
             }
 
         });

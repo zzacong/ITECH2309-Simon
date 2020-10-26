@@ -19,10 +19,11 @@ import simon.views.Button;
  */
 public class PlaySequenceListener implements ActionListener {
 
-    Timer timer = new Timer(1000, this);
-    GameWindowController controller;
-    Iterator<COLOUR> iter;
-    Button button;
+    private Timer timer = new Timer(1000, this);
+    private GameWindowController controller;
+    private Iterator<COLOUR> iter;
+    private Button button;
+    private boolean on;
 
     public PlaySequenceListener(GameWindowController controller) {
         this.controller = controller;
@@ -35,14 +36,20 @@ public class PlaySequenceListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (iter.hasNext()) { // safe check
-            System.out.println(".");
-            highlightButton(iter.next());
+        if (on) {
+            on = false;
+            timer.setDelay(200);
+            if (iter.hasNext()) { // safe check
+                highlightButton(iter.next());
+            } else {
+                System.out.println("stop");
+                controller.setBusy(false);
+                timer.stop();
+            }
         } else {
-            System.out.println("stop");
+            on = true;
+            timer.setDelay(controller.getSpeed());
             unhighlightButton();
-            controller.setBusy(false);
-            timer.stop();
         }
     }
 
@@ -50,14 +57,10 @@ public class PlaySequenceListener implements ActionListener {
         timer.start();
     }
 
-    public boolean isRunning() {
-        return this.timer.isRunning();
-    }
-
     private void highlightButton(COLOUR c) {
-        unhighlightButton();
         for (Button btn : controller.getColourButtons()) {
             if (Colour.compareColour(btn.getColour(), c)) {
+                System.out.println(".");
                 btn.setBackground(btn.getBackgroundColour());
                 button = btn;
             }

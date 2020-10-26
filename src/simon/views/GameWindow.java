@@ -4,6 +4,7 @@
 package simon.views;
 
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -17,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import java.awt.FlowLayout;
 
 /**
  * @author Zac
@@ -32,23 +34,24 @@ public class GameWindow {
     private Button btnRed;
     private Button btnBlue;
     private Button btnYellow;
-    private JButton btnStart;
+    private JButton btnPlay;
     private JButton btnExit;
+    private JButton btnStart;
 
     /**
      * Launch the application.
      */
-    // public static void main(String[] args) {
-    // EventQueue.invokeLater(new Runnable() {
-    // public void run() {
-    // try {
-    // GameWindow window = new GameWindow();
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    // }
-    // });
-    // }
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    GameWindow window = new GameWindow();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
     /**
      * Create the application.
@@ -62,9 +65,11 @@ public class GameWindow {
      */
     private void initialize() {
         frame = new JFrame();
+        frame.setResizable(false);
         frame.setTitle("Game Window");
-        frame.setBounds(100, 100, 450, 440);
+        frame.setBounds(100, 100, 450, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(new BorderLayout(0, 0));
         this.fillWindow();
         frame.setVisible(true);
     }
@@ -73,10 +78,7 @@ public class GameWindow {
      * Initialize content of frame.
      */
     public void fillWindow() {
-        GridBagLayout gbl_mainPanel = new GridBagLayout();
-        gbl_mainPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0 };
-        gbl_mainPanel.columnWeights = new double[] { 1.0 };
-        JPanel mainPanel = new JPanel(gbl_mainPanel);
+        JPanel mainPanel = new JPanel(new GridBagLayout());
         frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
 
         JPanel titlePanel = new JPanel();
@@ -84,7 +86,7 @@ public class GameWindow {
         gbc_titlePanel.fill = GridBagConstraints.BOTH;
         gbc_titlePanel.gridx = 0;
         gbc_titlePanel.gridy = 0;
-        gbc_titlePanel.insets = new Insets(10, 0, 20, 0);
+        gbc_titlePanel.insets = new Insets(20, 0, 10, 0);
         mainPanel.add(titlePanel, gbc_titlePanel);
 
         JLabel lblTitle = new JLabel("Simon Game");
@@ -96,6 +98,7 @@ public class GameWindow {
 
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc_buttonPanel = new GridBagConstraints();
+        gbc_buttonPanel.insets = new Insets(10, 0, 10, 0);
         gbc_buttonPanel.ipady = 40;
         gbc_buttonPanel.weighty = 1.0;
         gbc_buttonPanel.fill = GridBagConstraints.BOTH;
@@ -138,7 +141,7 @@ public class GameWindow {
 
         JPanel scorePanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc_scorePanel = new GridBagConstraints();
-        gbc_scorePanel.insets = new Insets(20, 0, 20, 0);
+        gbc_scorePanel.insets = new Insets(10, 0, 10, 0);
         gbc_scorePanel.fill = GridBagConstraints.BOTH;
         gbc_scorePanel.gridx = 0;
         gbc_scorePanel.gridy = 2;
@@ -147,8 +150,9 @@ public class GameWindow {
         JLabel lblCurrentScore = new JLabel("Score: ");
         lblCurrentScore.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
         GridBagConstraints gbc_lblCurrentScore = new GridBagConstraints();
+        gbc_lblCurrentScore.fill = GridBagConstraints.HORIZONTAL;
         gbc_lblCurrentScore.anchor = GridBagConstraints.LINE_START;
-        gbc_lblCurrentScore.insets = new Insets(0, 0, 10, 5);
+        gbc_lblCurrentScore.insets = new Insets(0, 0, 5, 20);
         gbc_lblCurrentScore.gridx = 0;
         gbc_lblCurrentScore.gridy = 0;
         scorePanel.add(lblCurrentScore, gbc_lblCurrentScore);
@@ -156,6 +160,7 @@ public class GameWindow {
         JLabel lblHighScore = new JLabel("High Score: ");
         lblHighScore.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
         GridBagConstraints gbc_lblHighScore = new GridBagConstraints();
+        gbc_lblHighScore.fill = GridBagConstraints.HORIZONTAL;
         gbc_lblHighScore.anchor = GridBagConstraints.LINE_START;
         gbc_lblHighScore.insets = new Insets(0, 0, 5, 20);
         gbc_lblHighScore.gridx = 0;
@@ -167,7 +172,8 @@ public class GameWindow {
         txtRoundScore.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
         txtRoundScore.setEditable(false);
         GridBagConstraints gbc_txtCurrentScore = new GridBagConstraints();
-        gbc_txtCurrentScore.insets = new Insets(0, 0, 10, 0);
+        gbc_txtCurrentScore.fill = GridBagConstraints.HORIZONTAL;
+        gbc_txtCurrentScore.insets = new Insets(0, 0, 5, 0);
         gbc_txtCurrentScore.gridx = 1;
         gbc_txtCurrentScore.gridy = 0;
         scorePanel.add(txtRoundScore, gbc_txtCurrentScore);
@@ -178,6 +184,7 @@ public class GameWindow {
         txtHighScore.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
         txtHighScore.setEditable(false);
         GridBagConstraints gbc_txtHighScore = new GridBagConstraints();
+        gbc_txtHighScore.fill = GridBagConstraints.HORIZONTAL;
         gbc_txtHighScore.insets = new Insets(0, 0, 5, 0);
         gbc_txtHighScore.gridx = 1;
         gbc_txtHighScore.gridy = 1;
@@ -188,26 +195,29 @@ public class GameWindow {
         lblMessage.setFont(new Font("Lucida Grande", Font.BOLD, 14));
         GridBagConstraints gbc_lblMessage = new GridBagConstraints();
         gbc_lblMessage.gridwidth = 2;
-        gbc_lblMessage.insets = new Insets(10, 0, 0, 0);
+        gbc_lblMessage.insets = new Insets(20, 0, 0, 0);
         gbc_lblMessage.gridx = 0;
         gbc_lblMessage.gridy = 2;
         scorePanel.add(lblMessage, gbc_lblMessage);
-
-        BorderLayout bl_controlPanel = new BorderLayout();
-        bl_controlPanel.setHgap(20);
-        JPanel controlPanel = new JPanel(bl_controlPanel);
+        JPanel controlPanel = new JPanel();
         GridBagConstraints gbc_controlPanel = new GridBagConstraints();
-        gbc_controlPanel.insets = new Insets(0, 0, 10, 0);
-        gbc_controlPanel.ipady = 20;
+        gbc_controlPanel.insets = new Insets(10, 0, 20, 0);
         gbc_controlPanel.gridx = 0;
         gbc_controlPanel.gridy = 3;
         mainPanel.add(controlPanel, gbc_controlPanel);
+        FlowLayout fl_controlPanel = new FlowLayout(FlowLayout.CENTER, 20, 0);
+        controlPanel.setLayout(fl_controlPanel);
 
-        btnStart = new JButton("Play");
-        controlPanel.add(btnStart, BorderLayout.WEST);
+        btnStart = new JButton("Start Game");
+        controlPanel.add(btnStart);
+
+        btnPlay = new JButton("Play");
+        btnPlay.setEnabled(false);
+        controlPanel.add(btnPlay);
 
         btnExit = new JButton("Exit");
-        controlPanel.add(btnExit, BorderLayout.EAST);
+        controlPanel.add(btnExit);
+
     }
 
     public Button getBtnGreen() {
@@ -228,6 +238,10 @@ public class GameWindow {
 
     public JButton getBtnStart() {
         return this.btnStart;
+    }
+
+    public JButton getBtnPlay() {
+        return this.btnPlay;
     }
 
     public JButton getBtnExit() {

@@ -9,7 +9,7 @@ import simon.views.GameWindow;
  * @author Zac
  *
  */
-public class GameLockedState implements IGameState {
+public class GameBusyState implements IGameState {
 
     @Override
     public void play(GameWindowController controller) {
