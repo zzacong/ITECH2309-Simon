@@ -4,7 +4,6 @@
 package simon.views;
 
 import java.awt.BorderLayout;
-// import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -19,12 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import simon.models.BlueButton;
-import simon.models.Button;
-import simon.models.GreenButton;
-import simon.models.RedButton;
-import simon.models.YellowButton;
-
 import java.awt.FlowLayout;
 
 /**
@@ -37,10 +30,10 @@ public class GameWindow {
     private JLabel lblMessage;
     private JTextField txtRoundScore;
     private JTextField txtHighScore;
-    private Button btnGreen;
-    private Button btnRed;
-    private Button btnBlue;
-    private Button btnYellow;
+    private JButton btnGreen;
+    private JButton btnRed;
+    private JButton btnBlue;
+    private JButton btnYellow;
     private JButton btnPlay;
     private JButton btnExit;
     private JButton btnStart;
@@ -113,7 +106,7 @@ public class GameWindow {
         gbc_buttonPanel.gridy = 1;
         mainPanel.add(buttonPanel, gbc_buttonPanel);
 
-        btnGreen = new GreenButton();
+        btnGreen = new JButton();
         btnGreen.setOpaque(true);
         GridBagConstraints gbc_btnGreen = new GridBagConstraints();
         gbc_btnGreen.insets = new Insets(10, 10, 10, 10);
@@ -121,7 +114,7 @@ public class GameWindow {
         gbc_btnGreen.gridy = 0;
         buttonPanel.add(btnGreen, gbc_btnGreen);
 
-        btnRed = new RedButton();
+        btnRed = new JButton();
         btnRed.setOpaque(true);
         GridBagConstraints gbc_btnRed = new GridBagConstraints();
         gbc_btnRed.insets = new Insets(10, 10, 10, 10);
@@ -129,7 +122,7 @@ public class GameWindow {
         gbc_btnRed.gridy = 0;
         buttonPanel.add(btnRed, gbc_btnRed);
 
-        btnYellow = new YellowButton();
+        btnYellow = new JButton();
         btnYellow.setOpaque(true);
         GridBagConstraints gbc_btnYellow = new GridBagConstraints();
         gbc_btnYellow.insets = new Insets(10, 10, 10, 10);
@@ -137,7 +130,7 @@ public class GameWindow {
         gbc_btnYellow.gridy = 1;
         buttonPanel.add(btnYellow, gbc_btnYellow);
 
-        btnBlue = new BlueButton();
+        btnBlue = new JButton();
         btnBlue.setOpaque(true);
         GridBagConstraints gbc_btnBlue = new GridBagConstraints();
         gbc_btnBlue.insets = new Insets(10, 10, 10, 10);
@@ -227,19 +220,19 @@ public class GameWindow {
 
     }
 
-    public Button getBtnGreen() {
+    public JButton getBtnGreen() {
         return this.btnGreen;
     }
 
-    public Button getBtnRed() {
+    public JButton getBtnRed() {
         return this.btnRed;
     }
 
-    public Button getBtnBlue() {
+    public JButton getBtnBlue() {
         return this.btnBlue;
     }
 
-    public Button getBtnYellow() {
+    public JButton getBtnYellow() {
         return this.btnYellow;
     }
 
@@ -255,8 +248,8 @@ public class GameWindow {
         return this.btnExit;
     }
 
-    public ArrayList<Button> getColourButtons() {
-        return new ArrayList<Button>(Arrays.asList(getBtnGreen(), getBtnRed(), getBtnBlue(), getBtnYellow()));
+    public ArrayList<JButton> getColourButtons() {
+        return new ArrayList<JButton>(Arrays.asList(getBtnGreen(), getBtnRed(), getBtnYellow(), getBtnBlue()));
     }
 
     public void setMessage(String msg) {

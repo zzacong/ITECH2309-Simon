@@ -4,6 +4,7 @@
 package simon.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 import simon.models.Colour.Keys;
@@ -14,8 +15,9 @@ import simon.models.Colour.Keys;
  */
 public class GameModel {
 
-    private ArrayList<Colour> gameSequence;
+    private static final ArrayList<Integer> SPEED = new ArrayList<Integer>(Arrays.asList(800, 1000, 1400));
 
+    private ArrayList<Colour> gameSequence;
     private Iterator<Colour> iter;
     private int roundscore;
     private int highscore;
@@ -70,8 +72,8 @@ public class GameModel {
         return this.initialSpeed;
     }
 
-    public void setInitialSpeed(int speed) {
-        this.initialSpeed = speed;
+    public void setInitialSpeed(int index) {
+        this.initialSpeed = SPEED.get(index);
     }
 
     public int getSpeed() {

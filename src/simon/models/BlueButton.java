@@ -7,6 +7,7 @@ import java.awt.Color;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 import simon.models.Colour.Keys;
 
@@ -20,6 +21,10 @@ public class BlueButton extends Button {
 
     public BlueButton() {
         super(Colour.getColour(Keys.BLUE));
+    }
+
+    public BlueButton(JButton button) {
+        super(Colour.getColour(Keys.BLUE), button);
     }
 
     @Override

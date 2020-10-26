@@ -27,12 +27,13 @@ public class PlaySequenceListener implements ActionListener {
 
     public PlaySequenceListener(GameController controller) {
         this.controller = controller;
-        this.delay = controller.getApp().getSpeed();
     }
 
     public void resetListener() {
         this.iter = controller.getApp().getNewSequenceIterator();
-        timer.setDelay(delay);
+        this.on = true;
+        this.delay = controller.getApp().getSpeed();
+        this.timer.setDelay(delay);
     }
 
     @Override
@@ -62,7 +63,7 @@ public class PlaySequenceListener implements ActionListener {
         for (Button btn : controller.getColourButtons()) {
             if (c.equals(btn.getColour())) {
                 System.out.println(".");
-                btn.setBackground(btn.getBackgroundColour());
+                btn.getButton().setBackground(btn.getBackgroundColour());
                 button = btn;
             }
         }
@@ -70,7 +71,7 @@ public class PlaySequenceListener implements ActionListener {
 
     private void unhighlightButton() {
         if (button != null) {
-            button.setBackground(null);
+            button.getButton().setBackground(null);
         }
     }
 

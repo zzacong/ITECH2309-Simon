@@ -6,6 +6,7 @@ package simon.models;
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 import simon.models.Colour.Keys;
 
@@ -19,6 +20,10 @@ public class GreenButton extends Button {
 
     public GreenButton() {
         super(Colour.getColour(Keys.GREEN));
+    }
+
+    public GreenButton(JButton button) {
+        super(Colour.getColour(Keys.GREEN), button);
     }
 
     @Override

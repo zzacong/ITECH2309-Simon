@@ -7,11 +7,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.Timer;
 
+import simon.models.BlueButton;
 import simon.models.Button;
 import simon.models.Colour;
 import simon.models.GameModel;
+import simon.models.GreenButton;
+import simon.models.RedButton;
+import simon.models.YellowButton;
 import simon.views.ConfigWindow;
 import simon.views.GameWindow;
 
@@ -28,6 +33,7 @@ public class GameController implements Controller {
     private IGameState currentState = new GameBusyState();
     private Timer backgroundTimer;
     private PlaySequenceListener sequencePlayer;
+    private ArrayList<Button> colourButtons = new ArrayList<Button>();
     private boolean busy = true;
 
     public GameController(GameModel app, GameWindow view) {
@@ -62,7 +68,7 @@ public class GameController implements Controller {
     }
 
     public ArrayList<Button> getColourButtons() {
-        return this.view.getColourButtons();
+        return this.colourButtons;
     }
 
     public void checkState() {
@@ -158,8 +164,26 @@ public class GameController implements Controller {
     }
 
     public void controlButton() {
-        for (Button button : view.getColourButtons()) {
-            button.addActionListener(new ColorButtonListener(this, button));
+        int i = 0;
+        for (JButton btn : view.getColourButtons()) {
+            Button button = null;
+            switch (i) {
+                case 0:
+                    button = new GreenButton(btn);
+                    break;
+                case 1:
+                    button = new RedButton(btn);
+                    break;
+                case 2:
+                    button = new YellowButton(btn);
+                    break;
+                case 3:
+                    button = new BlueButton(btn);
+                    break;
+            }
+            getColourButtons().add(button);
+            btn.addActionListener(new ColorButtonListener(this, button));
+            i++;
         }
     }
 

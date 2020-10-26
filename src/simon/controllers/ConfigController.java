@@ -79,11 +79,9 @@ public class ConfigController implements Controller {
             public void actionPerformed(ActionEvent e) {
                 if (validateInput()) {
                     String name = view.getTxtName().getText();
-                    int speed = (int) ((view.getCbxSpeed().getSelectedIndex() + 1) * 0.6 * 1000);
+                    int speed = view.getCbxSpeed().getSelectedIndex();
                     int number = (int) view.getCbxButtonNumber().getSelectedItem();
-                    System.out.println(name);
                     System.out.println(speed);
-                    System.out.println(number);
 
                     setPlayerName(name);
                     game.getApp().setInitialSpeed(speed);
