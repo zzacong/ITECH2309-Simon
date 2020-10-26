@@ -19,9 +19,10 @@ import javax.swing.table.TableRowSorter;
  */
 public class TableLeadership extends JTable {
 
+    private static final long serialVersionUID = 1L;
     private TableRowSorter<TableModel> sorter;
     Object[][] data = { { "Kathy", 2 }, { "John", 8 }, { "Sue", 5 }, { "Jane", 3 }, { "Joe", 4 } };
-    String[] columnNames = { "Name", "Highscores" };
+    private String[] columnNames = { "Name", "Highscores" };
 
     public TableLeadership() {
         initialize();

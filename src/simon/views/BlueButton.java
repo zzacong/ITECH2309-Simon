@@ -16,6 +16,8 @@ import simon.models.Colour.COLOUR;
  */
 public class BlueButton extends Button {
 
+    private static final long serialVersionUID = 1L;
+
     public BlueButton() {
         super(COLOUR.BLUE);
     }

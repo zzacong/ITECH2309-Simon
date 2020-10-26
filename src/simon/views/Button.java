@@ -16,6 +16,7 @@ import simon.models.Colour.COLOUR;
  */
 public abstract class Button extends JButton {
 
+    private static final long serialVersionUID = 1L;
     private COLOUR colour;
 
     public Button(COLOUR colour) {

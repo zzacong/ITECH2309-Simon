@@ -15,6 +15,8 @@ import simon.models.Colour.COLOUR;
  */
 public class GreenButton extends Button {
 
+    private static final long serialVersionUID = 1L;
+
     public GreenButton() {
         super(COLOUR.GREEN);
     }
