@@ -67,9 +67,12 @@ public class TableLeadership extends JTable {
         DefaultTableModel model = (DefaultTableModel) getModel();
         // Check if name already exists in leadership board
         for (int i = 0; i < model.getRowCount(); i++) {
-            String value = (String) model.getValueAt(i, 0);
-            if (value.equalsIgnoreCase((String) row[0])) { // Name already exist
-                model.setValueAt(row[1], i, 1);
+            String name = (String) model.getValueAt(i, 0);
+            int score = (int) model.getValueAt(i, 1);
+            if (name.equalsIgnoreCase((String) row[0])) { // Name already exist
+                if ((int) row[1] > score) {
+                    model.setValueAt(row[1], i, 1);
+                }
                 this.sorter.sort();
                 return false;
             }
