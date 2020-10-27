@@ -3,6 +3,8 @@
  */
 package simon.controllers;
 
+import javax.swing.JButton;
+
 import simon.views.GameWindow;
 
 /**
@@ -20,10 +22,9 @@ public class GameBusyState implements IGameState {
     }
 
     public void disableAllButtons(GameWindow view) {
-        view.getBtnGreen().setEnabled(false);
-        view.getBtnRed().setEnabled(false);
-        view.getBtnBlue().setEnabled(false);
-        view.getBtnYellow().setEnabled(false);
+        for (JButton button : view.getColourButtons()) {
+            button.setEnabled(false);
+        }
     }
 
 }

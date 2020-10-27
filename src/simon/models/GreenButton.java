@@ -16,8 +16,6 @@ import simon.models.Colour.Keys;
  */
 public class GreenButton extends Button {
 
-    private static final long serialVersionUID = 1L;
-
     public GreenButton() {
         super(Colour.getColour(Keys.GREEN));
     }

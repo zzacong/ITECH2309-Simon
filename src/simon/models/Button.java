@@ -5,16 +5,15 @@ package simon.models;
 
 import java.awt.Color;
 
-import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
  * @author Zac
  *
  */
-public abstract class Button extends JButton {
+public abstract class Button {
 
-    private static final long serialVersionUID = 1L;
     private Colour colour;
     private JButton button;
 
@@ -24,10 +23,10 @@ public abstract class Button extends JButton {
 
     public Button(Colour colour, JButton button) {
         this.setColour(colour);
-        this.button = button;
-        this.button.setIcon(getIcon());
-        this.button.setPressedIcon(getPressedIcon());
-        this.button.setDisabledIcon(getDisabledIcon());
+        this.setButton(button);
+        this.getButton().setIcon(getIcon());
+        this.getButton().setPressedIcon(getPressedIcon());
+        this.getButton().setDisabledIcon(getDisabledIcon());
     }
 
     public Colour getColour() {
@@ -42,11 +41,15 @@ public abstract class Button extends JButton {
         return this.button;
     }
 
-    public abstract Icon getIcon();
+    public void setButton(JButton button) {
+        this.button = button;
+    }
 
-    public abstract Icon getPressedIcon();
+    public abstract ImageIcon getIcon();
 
-    public abstract Icon getDisabledIcon();
+    public abstract ImageIcon getPressedIcon();
+
+    public abstract ImageIcon getDisabledIcon();
 
     public abstract Color getBackgroundColour();
 

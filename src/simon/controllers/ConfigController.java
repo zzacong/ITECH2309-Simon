@@ -43,7 +43,7 @@ public class ConfigController implements Controller {
     }
 
     public boolean validateName() {
-        if (view.getTxtName().getText().isBlank()) {
+        if (view.getTxtName().getText().isEmpty()) {
             triggerError(true);
             return false;
         }
@@ -66,6 +66,10 @@ public class ConfigController implements Controller {
         view.getTableLeadership().addRow(row);
     }
 
+    public void dispose() {
+        view.getFrame().dispose();
+    }
+
     @Override
     public void control() {
         controlConfirm();
@@ -81,7 +85,6 @@ public class ConfigController implements Controller {
                     String name = view.getTxtName().getText();
                     int speed = view.getCbxSpeed().getSelectedIndex();
                     int number = (int) view.getCbxButtonNumber().getSelectedItem();
-                    System.out.println(speed);
 
                     setPlayerName(name);
                     game.getApp().setInitialSpeed(speed);
