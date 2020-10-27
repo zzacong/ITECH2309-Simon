@@ -39,21 +39,6 @@ public class GameWindow {
     private JButton btnStart;
 
     /**
-     * Launch the application.
-     */
-    // public static void main(String[] args) {
-    // EventQueue.invokeLater(new Runnable() {
-    // public void run() {
-    // try {
-    // GameWindow window = new GameWindow();
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    // }
-    // });
-    // }
-
-    /**
      * Create the application.
      */
     public GameWindow() {
@@ -220,20 +205,24 @@ public class GameWindow {
 
     }
 
-    public JButton getBtnGreen() {
+    private JButton getBtnGreen() {
         return this.btnGreen;
     }
 
-    public JButton getBtnRed() {
+    private JButton getBtnRed() {
         return this.btnRed;
     }
 
-    public JButton getBtnBlue() {
+    private JButton getBtnBlue() {
         return this.btnBlue;
     }
 
-    public JButton getBtnYellow() {
+    private JButton getBtnYellow() {
         return this.btnYellow;
+    }
+
+    public ArrayList<JButton> getColourButtons() {
+        return new ArrayList<JButton>(Arrays.asList(getBtnGreen(), getBtnRed(), getBtnYellow(), getBtnBlue()));
     }
 
     public JButton getBtnStart() {
@@ -246,10 +235,6 @@ public class GameWindow {
 
     public JButton getBtnExit() {
         return this.btnExit;
-    }
-
-    public ArrayList<JButton> getColourButtons() {
-        return new ArrayList<JButton>(Arrays.asList(getBtnGreen(), getBtnRed(), getBtnYellow(), getBtnBlue()));
     }
 
     public void setMessage(String msg) {

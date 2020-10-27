@@ -16,6 +16,7 @@ import simon.models.Colour.Keys;
 public class GameModel {
 
     private static final ArrayList<Integer> SPEED = new ArrayList<Integer>(Arrays.asList(800, 1000, 1400));
+    private static final int FASTEST_SPEED = 300;
 
     private ArrayList<Colour> gameSequence;
     private Iterator<Colour> iter;
@@ -73,7 +74,12 @@ public class GameModel {
     }
 
     public void setInitialSpeed(int index) {
-        this.initialSpeed = SPEED.get(index);
+        try {
+            this.initialSpeed = SPEED.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Index out of bound. Setting default speed...");
+            this.initialSpeed = SPEED.get(1); // default to normal speed
+        }
     }
 
     public int getSpeed() {
@@ -81,7 +87,11 @@ public class GameModel {
     }
 
     public void speedUp() {
-        this.speed -= 100;
+        if (getSpeed() > FASTEST_SPEED) {
+            this.speed -= 100;
+        } else {
+            this.speed = FASTEST_SPEED;
+        }
     }
 
     public void resetSpeed() {
@@ -93,15 +103,24 @@ public class GameModel {
     }
 
     public void setInitialNumber(int initialNumber) {
-        this.initialNumber = initialNumber;
+        if (initialNumber >= 1 && initialNumber <= 5) {
+            this.initialNumber = initialNumber;
+        } else {
+            System.out.println("Initial number of buttons is out of valid range (1-5).");
+            this.initialNumber = 1; // set to default initial sequence number
+        }
     }
 
     public Colour getRandomColour() {
         return Colour.getColour(Keys.getRandomKey());
     }
 
+    public void addSequence(ArrayList<Colour> sequence, Colour colour) {
+        sequence.add(colour);
+    }
+
     public void addOneToGameSequence() {
-        gameSequence.add(getRandomColour());
+        addSequence(getSequence(), getRandomColour());
     }
 
     public void clearSequence() {
@@ -112,15 +131,16 @@ public class GameModel {
         return this.gameSequence;
     }
 
-    public Iterator<Colour> getNewSequenceIterator() {
-        return getSequence().iterator();
-    }
-
     public Iterator<Colour> getIter() {
         return this.iter;
+    }
+
+    public Iterator<Colour> getNewSequenceIterator() {
+        return getSequence().iterator();
     }
 
     public void resetIter() {
         this.iter = getNewSequenceIterator();
     }
+    
 }

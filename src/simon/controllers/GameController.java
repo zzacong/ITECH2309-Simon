@@ -79,11 +79,6 @@ public class GameController implements Controller {
         this.currentState = state;
     }
 
-    public void play() {
-        setBusy(true);
-        newRound();
-    }
-
     public void newRound() {
         app.setCounter(0);
         app.resetSpeed();
@@ -206,7 +201,7 @@ public class GameController implements Controller {
             public void actionPerformed(ActionEvent e) {
                 view.setMessage("Playing...");
                 view.getBtnPlay().setEnabled(false);
-                play();
+                newRound();
             }
 
         });
@@ -219,6 +214,7 @@ public class GameController implements Controller {
             public void actionPerformed(ActionEvent e) {
                 backgroundTimer.stop();
                 view.getFrame().dispose();
+                config.dispose();
             }
 
         });

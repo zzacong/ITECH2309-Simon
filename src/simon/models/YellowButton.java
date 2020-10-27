@@ -5,7 +5,6 @@ package simon.models;
 
 import java.awt.Color;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -16,8 +15,6 @@ import simon.models.Colour.Keys;
  *
  */
 public class YellowButton extends Button {
-
-    private static final long serialVersionUID = 1L;
 
     public YellowButton() {
         super(Colour.getColour(Keys.YELLOW));
@@ -38,7 +35,7 @@ public class YellowButton extends Button {
     }
 
     @Override
-    public Icon getDisabledIcon() {
+    public ImageIcon getDisabledIcon() {
         return new ImageIcon("images/WhiteYellow.png");
     }
 
