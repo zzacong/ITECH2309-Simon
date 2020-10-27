@@ -22,7 +22,7 @@ public abstract class Button {
     }
 
     public Button(Colour colour, JButton button) {
-        this.setColour(colour);
+        this(colour);
         this.setButton(button);
         this.getButton().setIcon(getIcon());
         this.getButton().setPressedIcon(getPressedIcon());
