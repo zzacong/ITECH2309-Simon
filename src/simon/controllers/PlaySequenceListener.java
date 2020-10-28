@@ -40,7 +40,7 @@ public class PlaySequenceListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (on) {
             on = false;
-            timer.setDelay(200);
+            timer.setDelay(200); // ensure there is a short indication between two same colour
             if (iter.hasNext()) { // safe check
                 highlightButton(iter.next());
             } else {
@@ -61,7 +61,7 @@ public class PlaySequenceListener implements ActionListener {
 
     private void highlightButton(Colour c) {
         for (Button btn : controller.getColourButtons()) {
-            if (c.equals(btn.getColour())) {
+            if (c.equals(btn.getColour())) { // loop through buttons to find the one with the right colour
                 System.out.println(".");
                 btn.getButton().setBackground(btn.getBackgroundColour());
                 button = btn;
@@ -70,7 +70,7 @@ public class PlaySequenceListener implements ActionListener {
     }
 
     private void unhighlightButton() {
-        if (button != null) {
+        if (button != null) { // safe check
             button.getButton().setBackground(null);
         }
     }

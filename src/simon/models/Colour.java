@@ -17,6 +17,7 @@ public class Colour {
     public static enum Keys {
         GREEN, RED, BLUE, YELLOW;
 
+        // Return a random Key
         public static Keys getRandomKey() {
             return values()[r.nextInt(4)];
         }
@@ -28,8 +29,8 @@ public class Colour {
     }
 
     public static Colour getColour(Keys key) {
-        Colour instance = COLOUR.get(key);
-        if (instance == null) {
+        Colour instance = COLOUR.get(key); // get the copy from HashMap
+        if (instance == null) { // if not in HashMap, create a new one
             instance = new Colour();
             COLOUR.put(key, instance);
         }

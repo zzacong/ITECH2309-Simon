@@ -52,7 +52,7 @@ public class GameModel {
     }
 
     public void updateHighScore() {
-        if (getRoundscore() > getHighscore()) {
+        if (getRoundscore() > getHighscore()) { // only update highscore when the roundscore is larger
             setHighscore(getRoundscore());
         }
     }
@@ -142,5 +142,5 @@ public class GameModel {
     public void resetIter() {
         this.iter = getNewSequenceIterator();
     }
-    
+
 }

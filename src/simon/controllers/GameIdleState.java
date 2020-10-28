@@ -13,6 +13,7 @@ import simon.views.GameWindow;
  */
 public class GameIdleState implements IGameState {
 
+    // IdleState: enable all colour buttons
     @Override
     public void play(GameController controller) {
         enableAllButtons(controller.getView());
