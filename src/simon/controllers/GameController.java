@@ -128,7 +128,7 @@ public class GameController implements Controller {
 
     public void closeRound() {
         setBusy(true);
-        if (app.getInitialNumber() > 0) {
+        if (app.getInitialNumber() > 0 && app.getRoundscore() > 0) {
             app.setRoundscore(app.getRoundscore() + app.getInitialNumber() - 1);
         }
         app.updateHighScore();

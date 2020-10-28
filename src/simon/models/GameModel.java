@@ -15,7 +15,7 @@ import simon.models.Colour.Keys;
  */
 public class GameModel {
 
-    private static final ArrayList<Integer> SPEED = new ArrayList<Integer>(Arrays.asList(800, 1000, 1400));
+    private static final ArrayList<Integer> SPEED = new ArrayList<Integer>(Arrays.asList(700, 1000, 1400));
     private static final int FASTEST_SPEED = 300;
 
     private ArrayList<Colour> gameSequence;
