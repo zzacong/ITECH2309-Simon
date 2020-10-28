@@ -13,6 +13,7 @@ import simon.views.GameWindow;
  */
 public class GameBusyState implements IGameState {
 
+    // BusyState: disable all colour buttons
     @Override
     public void play(GameController controller) {
         disableAllButtons(controller.getView());

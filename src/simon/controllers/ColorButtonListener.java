@@ -24,7 +24,7 @@ public class ColorButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("out");
+        // Pass in the button object which triggers this event
         controller.respond(button.getColour());
     }
 

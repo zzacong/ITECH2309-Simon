@@ -45,12 +45,16 @@ public abstract class Button {
         this.button = button;
     }
 
+    // The icon used as default
     public abstract ImageIcon getIcon();
 
+    // The icon used when button is pressed
     public abstract ImageIcon getPressedIcon();
 
+    // The icon used when button is disabled
     public abstract ImageIcon getDisabledIcon();
 
+    // The colour used to highlight th ebutton
     public abstract Color getBackgroundColour();
 
 }
