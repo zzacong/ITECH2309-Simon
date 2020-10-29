@@ -31,7 +31,7 @@ public class GameModelInitialSpeedTestCase {
     @Test
     public void testFastInitialSpeed() {
         app.setInitialSpeed(0);
-        assertEquals(800, app.getInitialSpeed());
+        assertEquals(700, app.getInitialSpeed());
     }
 
     @Test
